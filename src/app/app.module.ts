@@ -7,8 +7,10 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { DemoModule } from './demo/demo.module';
 
 const routes: Routes = [
+  { path: 'contactmanager', loadChildren: async () => (await import('./contactmanager/contactmanager.module') ).ContactmanagerModule },
   { path: 'demo', loadChildren: async () => (await import('./demo/demo.module') ).DemoModule },
-  { path: '**', redirectTo: 'demo' }
+  // { path: 'demo', loadChildren: () => import('./demo/demo.module').then(m => m.DemoModule) },
+  { path: '**', redirectTo: 'contactmanager' }
 ];
 
 @NgModule({
@@ -18,7 +20,7 @@ const routes: Routes = [
   imports: [
     BrowserModule,
     BrowserAnimationsModule,
-    RouterModule
+    RouterModule.forRoot(routes)
   ],
   providers: [],
   bootstrap: [AppComponent]
